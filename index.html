@@ -5,16 +5,76 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Concept Medical — Pioneering Drug-Coated Balloon Technology</title>
 <meta name="description" content="Sirolimus drug-delivery platforms for coronary, peripheral, and AV-access interventions. Choose your experience: Healthcare Professionals or Patients & Caregivers." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta name="googlebot" content="noindex, nofollow" />
 
 <link rel="stylesheet" href="colors_and_type.css" />
 <link rel="stylesheet" href="homepage.css" />
 <link rel="icon" type="image/png" href="assets/mark-cm-blue.png" />
+
+<!-- ── Nanolutè-inspired premium loader (inline so it paints before Babel compiles) ── -->
+<style id="cm-loader-style">
+  #cm-loader {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 30px;
+    background:
+      radial-gradient(120% 90% at 50% 38%, #1b3a78 0%, #122248 55%, #0c1834 100%);
+    font-family: 'Poppins', system-ui, sans-serif;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #cm-loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+  #cm-loader .lipo { width: 168px; height: 168px; display: block; }
+  #cm-loader .lipo .ring-beads { transform-origin: 100px 100px; animation: cmlSpin 9s linear infinite; }
+  #cm-loader .lipo .ring-tails { transform-origin: 100px 100px; animation: cmlSpinR 13s linear infinite; }
+  #cm-loader .lipo .arc { transform-origin: 100px 100px; animation: cmlSpin 1.5s cubic-bezier(0.65,0,0.35,1) infinite; }
+  #cm-loader .lipo .core { transform-origin: 100px 100px; animation: cmlPulse 1.9s ease-in-out infinite; }
+  #cm-loader .lipo .spec { animation: cmlSpec 1.9s ease-in-out infinite; }
+  @keyframes cmlSpin { to { transform: rotate(360deg); } }
+  @keyframes cmlSpinR { to { transform: rotate(-360deg); } }
+  @keyframes cmlPulse {
+    0%, 100% { transform: scale(1); opacity: 0.95; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+  @keyframes cmlSpec { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  #cm-loader .cml-word {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+  #cm-loader .cml-name {
+    font-size: 14px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase;
+    color: #fff; padding-left: 0.32em;
+  }
+  #cm-loader .cml-bar {
+    width: 132px; height: 2px; border-radius: 2px;
+    background: rgba(255,255,255,0.16); overflow: hidden; position: relative;
+  }
+  #cm-loader .cml-bar::after {
+    content: ""; position: absolute; inset: 0; width: 40%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #00B7F1, #6fa8e8, transparent);
+    animation: cmlSweep 1.4s cubic-bezier(0.65,0,0.35,1) infinite;
+  }
+  @keyframes cmlSweep { 0% { transform: translateX(-120%); } 100% { transform: translateX(320%); } }
+  #cm-loader .cml-sub {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #cm-loader .lipo .ring-beads,
+    #cm-loader .lipo .ring-tails,
+    #cm-loader .lipo .arc,
+    #cm-loader .lipo .core,
+    #cm-loader .lipo .spec,
+    #cm-loader .cml-bar::after { animation: none !important; }
+  }
+</style>
 
 <!-- Resources referenced as strings inside JSX (lifted for standalone bundling) -->
 <meta name="ext-resource-dependency" content="assets/mark-cm-blue.png" data-resource-id="markCm" />
 <meta name="ext-resource-dependency" content="assets/badge-gptw.png" data-resource-id="badgeGptw" />
 <meta name="ext-resource-dependency" content="assets/badge-esg.png" data-resource-id="badgeEsg" />
 <meta name="ext-resource-dependency" content="assets/logo-cm-circle-v3-blue.png" data-resource-id="gateLogo" />
+<meta name="ext-resource-dependency" content="assets/artery-balloon.png" data-resource-id="arteryBalloon" />
+<meta name="ext-resource-dependency" content="assets/quote-bg.jpg" data-resource-id="quoteBg" />
 
 <template id="__bundler_thumbnail" data-bg-color="#1D4E9F">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
@@ -29,11 +89,47 @@
 </head>
 <body>
 
+<div id="cm-loader" role="status" aria-label="Loading">
+  <svg class="lipo" viewBox="0 0 200 200" aria-hidden="true">
+    <defs>
+      <radialGradient id="bead" cx="38%" cy="32%" r="70%">
+        <stop offset="0%" stop-color="#eaf2ff"/>
+        <stop offset="55%" stop-color="#aac2ec"/>
+        <stop offset="100%" stop-color="#5f86c9"/>
+      </radialGradient>
+      <linearGradient id="tail" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7fb4ec"/>
+        <stop offset="100%" stop-color="#00B7F1"/>
+      </linearGradient>
+      <radialGradient id="core" cx="40%" cy="34%" r="68%">
+        <stop offset="0%" stop-color="#dff1ff"/>
+        <stop offset="45%" stop-color="#5b8fd6"/>
+        <stop offset="100%" stop-color="#1d3f86"/>
+      </radialGradient>
+    </defs>
+    <g class="ring-tails"><line x1="100.0" y1="36.0" x2="100.0" y2="60.0" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="118.0" y1="38.6" x2="111.3" y2="61.6" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="134.6" y1="46.2" x2="121.6" y2="66.3" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="148.4" y1="58.1" x2="130.2" y2="73.8" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="158.2" y1="73.4" x2="136.4" y2="83.4" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="163.3" y1="90.9" x2="139.6" y2="94.3" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="163.3" y1="109.1" x2="139.6" y2="105.7" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="158.2" y1="126.6" x2="136.4" y2="116.6" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="148.4" y1="141.9" x2="130.2" y2="126.2" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="134.6" y1="153.8" x2="121.6" y2="133.7" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="118.0" y1="161.4" x2="111.3" y2="138.4" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="100.0" y1="164.0" x2="100.0" y2="140.0" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="82.0" y1="161.4" x2="88.7" y2="138.4" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="65.4" y1="153.8" x2="78.4" y2="133.7" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="51.6" y1="141.9" x2="69.8" y2="126.2" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="41.8" y1="126.6" x2="63.6" y2="116.6" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="36.7" y1="109.1" x2="60.4" y2="105.7" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="36.7" y1="90.9" x2="60.4" y2="94.3" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="41.8" y1="73.4" x2="63.6" y2="83.4" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="51.6" y1="58.1" x2="69.8" y2="73.8" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="65.4" y1="46.2" x2="78.4" y2="66.3" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/><line x1="82.0" y1="38.6" x2="88.7" y2="61.6" stroke="url(#tail)" stroke-width="2.2" stroke-linecap="round"/></g>
+    <g class="ring-beads"><circle cx="100.0" cy="26.0" r="6.4" fill="url(#bead)"/><circle cx="120.8" cy="29.0" r="6.4" fill="url(#bead)"/><circle cx="140.0" cy="37.7" r="6.4" fill="url(#bead)"/><circle cx="155.9" cy="51.5" r="6.4" fill="url(#bead)"/><circle cx="167.3" cy="69.3" r="6.4" fill="url(#bead)"/><circle cx="173.2" cy="89.5" r="6.4" fill="url(#bead)"/><circle cx="173.2" cy="110.5" r="6.4" fill="url(#bead)"/><circle cx="167.3" cy="130.7" r="6.4" fill="url(#bead)"/><circle cx="155.9" cy="148.5" r="6.4" fill="url(#bead)"/><circle cx="140.0" cy="162.3" r="6.4" fill="url(#bead)"/><circle cx="120.8" cy="171.0" r="6.4" fill="url(#bead)"/><circle cx="100.0" cy="174.0" r="6.4" fill="url(#bead)"/><circle cx="79.2" cy="171.0" r="6.4" fill="url(#bead)"/><circle cx="60.0" cy="162.3" r="6.4" fill="url(#bead)"/><circle cx="44.1" cy="148.5" r="6.4" fill="url(#bead)"/><circle cx="32.7" cy="130.7" r="6.4" fill="url(#bead)"/><circle cx="26.8" cy="110.5" r="6.4" fill="url(#bead)"/><circle cx="26.8" cy="89.5" r="6.4" fill="url(#bead)"/><circle cx="32.7" cy="69.3" r="6.4" fill="url(#bead)"/><circle cx="44.1" cy="51.5" r="6.4" fill="url(#bead)"/><circle cx="60.0" cy="37.7" r="6.4" fill="url(#bead)"/><circle cx="79.2" cy="29.0" r="6.4" fill="url(#bead)"/></g>
+    <circle class="arc" cx="100" cy="100" r="88" fill="none" stroke="#00B7F1" stroke-width="3" stroke-linecap="round" stroke-dasharray="70 480" opacity="0.9"/>
+    <g class="core">
+      <circle cx="100" cy="100" r="23" fill="url(#core)"/>
+      <circle class="spec" cx="92" cy="92" r="6" fill="#ffffff" opacity="0.85"/>
+    </g>
+  </svg>
+  <div class="cml-word">
+    <div class="cml-name">Concept Medical</div>
+    <div class="cml-bar"></div>
+    <div class="cml-sub">Loading clinical evidence</div>
+  </div>
+</div>
+
 <div id="root" data-screen-label="Home"></div>
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- user-fillable chart image placeholders (plain web component) -->
+<script src="image-slot.js"></script>
 
 <!-- Tweakable defaults — editable from the Tweaks panel; the host rewrites this block on disk. -->
 <script type="text/babel">
@@ -45,17 +141,41 @@ window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "showSocietyBand": true,
   "showPullQuote": true,
   "italicAccents": true,
-  "denseSpacing": false
+  "denseSpacing": false,
+  "animations": true
 }/*EDITMODE-END*/;
 </script>
 
 <script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="anims.jsx"></script>
 <script type="text/babel" src="charts.jsx"></script>
 <script type="text/babel" src="shared.jsx"></script>
 <script type="text/babel" src="gate.jsx"></script>
 <script type="text/babel" src="hcp.jsx"></script>
 <script type="text/babel" src="patient.jsx"></script>
 <script type="text/babel" src="app.jsx"></script>
+
+<!-- dismiss the loader once React has rendered (with a graceful minimum display) -->
+<script>
+(function () {
+  var ov = document.getElementById('cm-loader');
+  if (!ov) return;
+  var start = Date.now(), MIN = 1000, done = false;
+  function finish() {
+    if (done) return; done = true;
+    var wait = Math.max(0, MIN - (Date.now() - start));
+    setTimeout(function () {
+      ov.classList.add('is-done');
+      setTimeout(function () { if (ov && ov.parentNode) ov.parentNode.removeChild(ov); }, 650);
+    }, wait);
+  }
+  var root = document.getElementById('root');
+  var iv = setInterval(function () {
+    if (root && root.children.length > 0) { clearInterval(iv); finish(); }
+  }, 80);
+  setTimeout(function () { clearInterval(iv); finish(); }, 9000);
+})();
+</script>
 
 </body>
 </html>

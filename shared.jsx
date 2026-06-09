@@ -144,7 +144,7 @@ function Ticker({ items, hidden = false }) {
     { l: 'SIRONA', t: '88.2% vs 80.2% · freedom from CD-TLR @ 36 mo' },
     { l: 'SirPAD', t: 'NEJM · –4.9% MALE risk difference, p=0.009' },
     { l: 'IMPRESSION', t: 'Superior AVF target-lesion patency vs plain PTA' },
-    { l: 'MagicTouch', t: '35+ trials · 75+ countries · 9 indications' },
+    { l: 'MagicTouch', t: '45+ trials · 80+ countries · 9 indications' },
     { l: 'EuroPCR 2026', t: 'Symposium on demand · 12 abstracts presented' },
   ];
   return (
@@ -161,23 +161,28 @@ function Ticker({ items, hidden = false }) {
   );
 }
 
-// SOCIETY BAND — where the data was presented
-function SocietyBand({ items, label = "Presented at" }) {
+// SOCIETY BAND — conference logo wall (where the data was presented)
+function SocietyBand({ items, label = "Presented at the world's leading cardiovascular congresses" }) {
   const li = items || [
-    { name: 'TCT 2025', sub: 'Washington' },
-    { name: 'ESC HOTLINE', sub: 'London' },
-    { name: 'EuroPCR 2026', sub: 'Paris' },
-    { name: 'LINC 2026', sub: 'Leipzig' },
-    { name: 'VIVA 2025', sub: 'Las Vegas' },
-    { name: 'CX 2026', sub: 'London' },
+    { mark: 'TCT', sub: 'USA', style: 'bold' },
+    { mark: 'EuroPCR', sub: 'Paris', style: 'serif' },
+    { mark: 'CRT', sub: 'Washington', style: 'bold' },
+    { mark: 'LINC', sub: 'Leipzig', style: 'bold' },
+    { mark: 'VIVA', sub: 'Las Vegas', style: 'bold' },
+    { mark: 'VEITH', sub: 'Symposium', style: 'serif' },
+    { mark: 'CX', sub: 'Symposium', style: 'bold' },
+    { mark: 'ESC', sub: 'Hotline', style: 'serif' },
   ];
   return (
     <div className="society-band">
       <div className="container">
         <div className="label" style={{ marginBottom: 18 }}>{label}</div>
-        <div className="society-row">
-          {li.map(s => (
-            <div className="item" key={s.name}>{s.name}</div>
+        <div className="conf-wall">
+          {li.map((s, i) => (
+            <div className="conf-logo" key={i}>
+              <span className={'cl-mark' + (s.style === 'serif' ? ' serif' : '')}>{s.mark}</span>
+              <span className="cl-sub">{s.sub}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -185,10 +190,59 @@ function SocietyBand({ items, label = "Presented at" }) {
   );
 }
 
-// PULL QUOTE — over navy background image
-function PullQuote({ text, cite }) {
+// PULL QUOTE — classic (navy, centered) OR photo (emotional, patient-centric)
+function PullQuote({ text, cite, eyebrow, name, context, chips, photoSlotId, portraitTag, bgImage }) {
+  // photo variant: emotional, image-backed, with quality-of-life chips
+  if (photoSlotId) {
+    const chipIcon = (kind) => {
+      const p = { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' };
+      if (kind === 'walk') return <svg {...p}><circle cx="13" cy="4" r="2" /><path d="m9 21 2-6 1.5-2L11 9l-3 2-2 3" /><path d="m13 13 2 3 3 1" /><path d="M11 9.5 14 8l3 2 .5 3" /></svg>;
+      if (kind === 'home') return <svg {...p}><path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2h-3v-6H8v6H5a2 2 0 0 1-2-2Z" /></svg>;
+      if (kind === 'clock') return <svg {...p}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>;
+      if (kind === 'heart') return <svg {...p}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z" /></svg>;
+      return <svg {...p}><path d="M20 6 9 17l-5-5" /></svg>;
+    };
+    return (
+      <section className="pull-quote pq-photo" data-screen-label="Patient Testimonial">
+        <div className="container">
+          <div className="pq-photo-grid">
+            <div className="pq-portrait">
+              <image-slot id={photoSlotId} shape="rounded" radius="14" fit="cover"
+                placeholder="Drop patient portrait"></image-slot>
+              {portraitTag && (
+                <div className="pq-portrait-tag">
+                  <span className="pulse" />
+                  <span className="txt">{portraitTag}</span>
+                </div>
+              )}
+            </div>
+            <div className="pq-content">
+              {eyebrow && <div className="pq-eyebrow">{eyebrow}</div>}
+              <blockquote><span className="lead-mark">“</span>{text}</blockquote>
+              {(name || context) && (
+                <div className="pq-attrib">
+                  {name && <span className="pq-name">{name}</span>}
+                  {name && context && <span className="pq-sep" />}
+                  {context && <span className="pq-context">{context}</span>}
+                </div>
+              )}
+              {chips && chips.length > 0 && (
+                <div className="pq-chips">
+                  {chips.map((c, i) => (
+                    <span className="pq-chip" key={i}>{chipIcon(c.icon)}{c.label}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // classic centered variant (investigator quote, etc.)
   return (
-    <div className="pull-quote">
+    <div className="pull-quote" style={bgImage ? { backgroundImage: `url('${bgImage}')` } : null}>
       <div className="pq-inner">
         <div className="mark">"</div>
         <blockquote>{text}</blockquote>
@@ -201,7 +255,7 @@ function PullQuote({ text, cite }) {
 // SECTION HEAD — eyebrow + title + lead, used everywhere
 function SectionHead({ eyebrow, title, lead, dark = false, align = 'left' }) {
   return (
-    <div style={{ textAlign: align, maxWidth: align === 'center' ? 720 : 'none', margin: align === 'center' ? '0 auto' : 0, marginBottom: 40 }}>
+    <div className="section-head" style={{ textAlign: align, maxWidth: align === 'center' ? 720 : 'none', margin: align === 'center' ? '0 auto' : 0, marginBottom: 40 }}>
       {eyebrow && <span className="eyebrow">{eyebrow}</span>}
       {title && <h2 className="section-title" dangerouslySetInnerHTML={{ __html: title }} style={align === 'center' ? { margin: '12px auto 18px' } : null} />}
       {lead && <p className="section-lead" style={align === 'center' ? { margin: '0 auto' } : null}>{lead}</p>}

@@ -43,6 +43,18 @@ function App() {
     return () => { document.body.style.overflow = ''; };
   }, [gateOpen]);
 
+  // ── motion layer: toggle cm-anim class + (re)initialise scroll reveals ────
+  const reduceMotion = React.useMemo(
+    () => typeof window !== 'undefined' && window.matchMedia
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    []
+  );
+  React.useEffect(() => {
+    const on = (t.animations !== false) && !reduceMotion;
+    document.documentElement.classList.toggle('cm-anim', on);
+    if (window.CMAnims && window.CMAnims.init) window.CMAnims.init();
+  }, [t.animations, reduceMotion, audience, gateOpen, t.showTicker, t.showSocietyBand, t.showPullQuote, t.showEvidenceNav, t.denseSpacing]);
+
   const a = audience || 'hcp';
 
   // accent palettes — curated, all rooted in CM brand
@@ -113,6 +125,13 @@ function App() {
           label="Pull quote"
           value={t.showPullQuote}
           onChange={(v) => setTweak('showPullQuote', v)}
+        />
+
+        <TweakSection label="Motion" />
+        <TweakToggle
+          label="Scroll animations"
+          value={t.animations !== false}
+          onChange={(v) => setTweak('animations', v)}
         />
 
         <TweakSection label="Typography" />

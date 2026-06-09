@@ -2,13 +2,14 @@
 
 // PATIENT — same hook for accent + section toggles
 function PatientHome() {
-  const t = (typeof useT === 'function') ? useT() : {};
+  const t = typeof useT === 'function' ? useT() : {};
   const accent = t.patientAccent || '#00B7F1';
   return (
     <main data-screen-label="Patient Home" style={{ '--patient-accent': accent }}>
 
       {/* ============ HERO ============ */}
       <section className="pt-hero" id="pt-hero">
+        <span className="hero-aurora pt" aria-hidden="true" />
         <div className="container">
           <div className="pt-hero-grid">
             <div>
@@ -27,11 +28,11 @@ function PatientHome() {
               <div className="reassurance">
                 <div className="item">
                   <span className="check">✓</span>
-                  <span>Used in <strong>75+ countries</strong></span>
+                  <span>Used in <strong>80+ countries</strong></span>
                 </div>
                 <div className="item">
                   <span className="check">✓</span>
-                  <span>Backed by <strong>35+ clinical trials</strong></span>
+                  <span>Backed by <strong>45+ clinical trials</strong></span>
                 </div>
                 <div className="item">
                   <span className="check">✓</span>
@@ -40,28 +41,15 @@ function PatientHome() {
               </div>
             </div>
 
-            <div className="pt-hero-visual">
-              <div className="frame">
-                <svg viewBox="0 0 320 240" width="100%" height="100%" style={{ position: 'absolute', inset: 0 }}>
-                  <defs>
-                    <linearGradient id="vesselGrad" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#1D4E9F" />
-                      <stop offset="100%" stopColor="#00B7F1" />
-                    </linearGradient>
-                  </defs>
-                  {/* Stylised artery + balloon — illustrative */}
-                  <path d="M 20 120 Q 80 80 160 120 T 300 120" stroke="#C9D0DC" strokeWidth="22" fill="none" strokeLinecap="round" />
-                  <path d="M 20 120 Q 80 80 160 120 T 300 120" stroke="#fff" strokeWidth="10" fill="none" strokeLinecap="round" />
-                  {/* narrowed section */}
-                  <ellipse cx="160" cy="120" rx="32" ry="13" fill="url(#vesselGrad)" opacity="0.8" />
-                  <ellipse cx="160" cy="120" rx="32" ry="13" fill="none" stroke="#1D4E9F" strokeWidth="2" strokeDasharray="4 3" />
-                  {/* balloon catheter line */}
-                  <line x1="160" y1="120" x2="160" y2="200" stroke="#1D4E9F" strokeWidth="2" strokeDasharray="3 3" />
-                  <text x="160" y="215" fontFamily="Poppins" fontSize="10" textAnchor="middle" fontWeight="600" fill="#1D4E9F" letterSpacing="0.1em">DRUG-COATED BALLOON</text>
-                  <text x="160" y="60" fontFamily="Poppins" fontSize="10" textAnchor="middle" fontWeight="600" fill="#6B7589" letterSpacing="0.1em">NARROWED ARTERY</text>
-                </svg>
+            <div className="pt-hero-photo">
+              <div className="main-shot">
+                <image-slot id="pt-hero-photo" shape="rounded" radius="20" fit="cover"
+                placeholder="Drop patient / caregiver photo"></image-slot>
+                <span className="trust-badge">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>
+                  Trusted in 80+ countries
+                </span>
               </div>
-              <div className="placeholder-note">Illustrative · not to scale</div>
             </div>
           </div>
         </div>
@@ -72,7 +60,7 @@ function PatientHome() {
         <div className="container">
           <div className="stat-strip-grid">
             <div className="stat-strip-cell">
-              <div className="num">75<span className="suffix">+</span></div>
+              <div className="num">80<span className="suffix">+</span></div>
               <div className="label">Countries where the treatment is used</div>
             </div>
             <div className="stat-strip-cell">
@@ -80,7 +68,7 @@ function PatientHome() {
               <div className="label">The year Concept Medical was founded</div>
             </div>
             <div className="stat-strip-cell">
-              <div className="num">35<span className="suffix">+</span></div>
+              <div className="num">45<span className="suffix">+</span></div>
               <div className="label">Clinical trials studying our technology</div>
             </div>
             <div className="stat-strip-cell">
@@ -98,30 +86,30 @@ function PatientHome() {
             eyebrow="Conditions we treat"
             title='What condition are <em class="editorial">you</em> learning about?'
             lead="Drug-coated balloon treatment can address several conditions affecting your arteries and veins. Choose the one that applies to you."
-            align="center"
-          />
+            align="center" />
+          
           <div className="condition-grid">
             {[
-              {
-                name: 'Peripheral Artery Disease',
-                short: 'PAD',
-                ico: <path d="M3 12s2-6 9-6 9 6 9 6-2 6-9 6-9-6-9-6z M12 9v6M9 12h6" />,
-                desc: 'When arteries in your legs become narrowed, causing leg pain, cramps when walking, or wounds that won\'t heal.',
-              },
-              {
-                name: 'Coronary Artery Disease',
-                short: 'CAD',
-                ico: <path d="M12 21s-7-4.5-7-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-7 11-7 11z" />,
-                desc: 'When arteries that supply your heart become narrowed, causing chest pain (angina) or shortness of breath.',
-              },
-              {
-                name: 'AV Fistula for Dialysis',
-                short: 'AVF',
-                ico: <path d="M5 6c4 0 6 3 6 6s-2 6-6 6M19 6c-4 0-6 3-6 6s2 6 6 6" />,
-                desc: 'If you receive dialysis, the access point in your arm (a fistula) can develop a narrowing that affects treatment.',
-              },
-            ].map((c, i) => (
-              <a className="cond-card" href="#" key={c.short}>
+            {
+              name: 'Peripheral Artery Disease',
+              short: 'PAD',
+              ico: <path d="M3 12s2-6 9-6 9 6 9 6-2 6-9 6-9-6-9-6z M12 9v6M9 12h6" />,
+              desc: 'When arteries in your legs become narrowed, causing leg pain, cramps when walking, or wounds that won\'t heal.'
+            },
+            {
+              name: 'Coronary Artery Disease',
+              short: 'CAD',
+              ico: <path d="M12 21s-7-4.5-7-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-7 11-7 11z" />,
+              desc: 'When arteries that supply your heart become narrowed, causing chest pain (angina) or shortness of breath.'
+            },
+            {
+              name: 'AV Fistula for Dialysis',
+              short: 'AVF',
+              ico: <path d="M5 6c4 0 6 3 6 6s-2 6-6 6M19 6c-4 0-6 3-6 6s2 6 6 6" />,
+              desc: 'If you receive dialysis, the access point in your arm (a fistula) can develop a narrowing that affects treatment.'
+            }].
+            map((c, i) =>
+            <a className="cond-card" href="#" key={c.short}>
                 <div className="ico">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{c.ico}</svg>
                 </div>
@@ -130,7 +118,7 @@ function PatientHome() {
                 <p>{c.desc}</p>
                 <span className="link">Learn more <span className="arrow">→</span></span>
               </a>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -142,8 +130,21 @@ function PatientHome() {
             eyebrow="How the treatment works"
             title='A <em class="editorial">small balloon</em> with a smart coating.'
             lead="The procedure is minimally invasive — your physician uses a small balloon, coated with a medicine called sirolimus, to open up the narrowed area in your artery."
-            align="center"
-          />
+            align="center" />
+          
+          <div className="how-product">
+            <div className="artery-illustration">
+              <span className="artery-glow" aria-hidden="true" />
+              <img src={(window.__resources && window.__resources.arteryBalloon) || "assets/artery-balloon.png"} alt="Drug-coated balloon inflated inside a narrowed artery, compressing plaque against the vessel wall" />
+              <span className="artery-shimmer" aria-hidden="true" />
+            </div>
+            <div className="hp-copy">
+              <span className="eyebrow">Inside the artery</span>
+              <h3>The balloon opens the narrowing — from the inside.</h3>
+              <p>Guided to the narrowed section, the MagicTouch™ balloon gently inflates to widen the vessel and release its sirolimus coating into the artery wall — then it’s removed, leaving nothing behind.</p>
+              <span className="po-name">MagicTouch™ Sirolimus-coated balloon</span>
+            </div>
+          </div>
           <div className="steps-grid">
             <div className="step">
               <div className="num">1</div>
@@ -173,65 +174,75 @@ function PatientHome() {
           <SectionHead
             eyebrow="What to expect"
             title='Before, during, <em class="editorial">and after</em> your procedure.'
-            lead="Knowing what to expect can make a big difference. Here's a typical journey — your physician will tailor it to your situation."
-          />
+            lead="Knowing what to expect can make a big difference. Here's a typical journey — your physician will tailor it to your situation." />
+          
           <div className="condition-grid">
             {[
-              {
-                phase: 'Before',
-                title: 'Preparing for the procedure',
-                bullets: [
-                  'Your physician explains the procedure and answers your questions',
-                  'You may need blood tests, imaging, or a brief check-in visit',
-                  'You\'ll receive instructions on eating, drinking, and medications',
-                  'A caregiver can usually accompany you on the day of treatment',
-                ],
-              },
-              {
-                phase: 'During',
-                title: 'The day of the procedure',
-                bullets: [
-                  'The procedure typically lasts 1–2 hours',
-                  'You receive local anaesthesia — you\'re awake but comfortable',
-                  'You may feel pressure, but not sharp pain, as the balloon inflates',
-                  'You\'ll be monitored for a few hours afterwards',
-                ],
-              },
-              {
-                phase: 'After',
-                title: 'Recovery and follow-up',
-                bullets: [
-                  'Most patients go home the same day or the next morning',
-                  'Light activity within a day or two — your team will guide you',
-                  'You\'ll have follow-up visits to check how the artery is healing',
-                  'Take medications exactly as prescribed for the best long-term result',
-                ],
-              },
-            ].map((p, i) => (
-              <div className="cond-card" key={p.phase} style={{ cursor: 'default' }}>
+            {
+              phase: 'Before',
+              title: 'Preparing for the procedure',
+              bullets: [
+              'Your physician explains the procedure and answers your questions',
+              'You may need blood tests, imaging, or a brief check-in visit',
+              'You\'ll receive instructions on eating, drinking, and medications',
+              'A caregiver can usually accompany you on the day of treatment']
+
+            },
+            {
+              phase: 'During',
+              title: 'The day of the procedure',
+              bullets: [
+              'The procedure typically lasts 1–2 hours',
+              'You receive local anaesthesia — you\'re awake but comfortable',
+              'You may feel pressure, but not sharp pain, as the balloon inflates',
+              'You\'ll be monitored for a few hours afterwards']
+
+            },
+            {
+              phase: 'After',
+              title: 'Recovery and follow-up',
+              bullets: [
+              'Most patients go home the same day or the next morning',
+              'Light activity within a day or two — your team will guide you',
+              'You\'ll have follow-up visits to check how the artery is healing',
+              'Take medications exactly as prescribed for the best long-term result']
+
+            }].
+            map((p, i) =>
+            <div className="cond-card" key={p.phase} style={{ cursor: 'default' }}>
                 <div className="cond-name" style={{ color: i === 0 ? 'var(--cm-blue-500)' : i === 1 ? 'var(--cm-blue-200)' : 'var(--cm-blue-700)' }}>{p.phase}</div>
                 <h3>{p.title}</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  {p.bullets.map((b, j) => (
-                    <li key={j} style={{ fontSize: 14, color: 'var(--neutral-700)', padding: '8px 0 8px 22px', position: 'relative', lineHeight: 1.5 }}>
+                  {p.bullets.map((b, j) =>
+                <li key={j} style={{ fontSize: 14, color: 'var(--neutral-700)', padding: '8px 0 8px 22px', position: 'relative', lineHeight: 1.5 }}>
                       <span style={{ position: 'absolute', left: 0, top: 13, width: 12, height: 1.5, background: i === 0 ? 'var(--cm-blue-500)' : i === 1 ? 'var(--cm-blue-200)' : 'var(--cm-blue-700)' }} />
                       {b}
                     </li>
-                  ))}
+                )}
                 </ul>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
 
       {/* ============ PATIENT STORY (quote) ============ */}
-      {t.showPullQuote !== false && (
-        <PullQuote
-          text='"I walked further on Saturday than I had in two years. My doctor explained what they were doing every step of the way, which made everything less scary."'
-          cite="Patient · age 67 · peripheral artery disease"
-        />
-      )}
+      {t.showPullQuote !== false &&
+      <PullQuote
+        photoSlotId="testimonial-portrait"
+        portraitTag="Walking again · 14 weeks on"
+        eyebrow="A patient story"
+        text="I walked further on Saturday than I had in two years. My doctor explained every step, which made it far less frightening — and I was home the same day."
+        name="Margaret R."
+        context="Age 67 · peripheral artery disease · treated with MagicTouch PTA"
+        chips={[
+        { icon: 'walk', label: 'Walking without pain' },
+        { icon: 'clock', label: 'Day-case procedure' },
+        { icon: 'home', label: 'Home the same day' },
+        { icon: 'heart', label: 'Back to gardening' }]
+        } />
+
+      }
 
       {/* ============ FIND A DOCTOR ============ */}
       <section className="section" id="find-doctor">
@@ -271,20 +282,12 @@ function PatientHome() {
               </p>
             </div>
 
-            <div className="map-frame" aria-hidden="true">
-              <svg viewBox="0 0 400 280" style={{ width: '100%', height: '100%', display: 'block' }}>
-                {/* fake region dots */}
-                {[
-                  [80, 60], [120, 80], [200, 70], [260, 110], [310, 140],
-                  [150, 140], [220, 170], [90, 180], [180, 220], [280, 200],
-                  [340, 90], [70, 110]
-                ].map(([x, y], i) => (
-                  <g key={i}>
-                    <circle cx={x} cy={y} r="14" fill="rgba(0,183,241,0.10)" />
-                    <circle cx={x} cy={y} r="5" fill="#00B7F1" />
-                  </g>
-                ))}
-              </svg>
+            <div className="globe-wrap" aria-hidden="true">
+              <Globe3D />
+              <span className="globe-badge">
+                <span className="gb-num">80+</span>
+                <span className="gb-txt">countries</span>
+              </span>
             </div>
           </div>
         </div>
@@ -296,22 +299,22 @@ function PatientHome() {
           <SectionHead
             eyebrow="Questions you may have"
             title='Frequently asked <em class="editorial">questions</em>.'
-            lead="Common questions from patients and caregivers. For anything specific to your situation, please ask your physician."
-          />
+            lead="Common questions from patients and caregivers. For anything specific to your situation, please ask your physician." />
+          
           <div className="faq-grid">
             {[
-              { q: 'Is the procedure painful?', a: 'Most patients report pressure rather than sharp pain. You receive local anaesthesia and may also be given medicine to keep you relaxed. Your team will check with you throughout the procedure.' },
-              { q: 'How long does recovery take?', a: 'Many patients return to normal light activities within 1–2 days, although you should follow your physician\'s specific recovery plan. You\'ll have a follow-up visit a few weeks later.' },
-              { q: 'What does the medicine on the balloon do?', a: 'The coating is a medicine called sirolimus, which has been used in cardiovascular medicine for over 15 years. It helps prevent the artery from narrowing again after the balloon opens it up.' },
-              { q: 'Does anything stay inside my body?', a: 'No. The balloon and catheter are removed at the end of the procedure. Only a precise dose of medicine remains in the wall of the artery, where it gradually works to keep the vessel open.' },
-              { q: 'Will I need to take medications afterwards?', a: 'You will likely be prescribed medications such as antiplatelets to support healing. It is very important to take them exactly as your physician instructs.' },
-              { q: 'How is this different from a stent?', a: 'A stent is a small metal mesh tube that stays in the artery permanently. A drug-coated balloon delivers medicine and is then removed — nothing is left behind. Your physician will recommend the best option for you.' },
-            ].map((f, i) => (
-              <details className="faq-item" key={i}>
+            { q: 'Is the procedure painful?', a: 'Most patients report pressure rather than sharp pain. You receive local anaesthesia and may also be given medicine to keep you relaxed. Your team will check with you throughout the procedure.' },
+            { q: 'How long does recovery take?', a: 'Many patients return to normal light activities within 1–2 days, although you should follow your physician\'s specific recovery plan. You\'ll have a follow-up visit a few weeks later.' },
+            { q: 'What does the medicine on the balloon do?', a: 'The coating is a medicine called sirolimus, which has been used in cardiovascular medicine for over 15 years. It helps prevent the artery from narrowing again after the balloon opens it up.' },
+            { q: 'Does anything stay inside my body?', a: 'No. The balloon and catheter are removed at the end of the procedure. Only a precise dose of medicine remains in the wall of the artery, where it gradually works to keep the vessel open.' },
+            { q: 'Will I need to take medications afterwards?', a: 'You will likely be prescribed medications such as antiplatelets to support healing. It is very important to take them exactly as your physician instructs.' },
+            { q: 'How is this different from a stent?', a: 'A stent is a small metal mesh tube that stays in the artery permanently. A drug-coated balloon delivers medicine and is then removed — nothing is left behind. Your physician will recommend the best option for you.' }].
+            map((f, i) =>
+            <details className="faq-item" key={i}>
                 <summary>{f.q}</summary>
                 <p>{f.a}</p>
               </details>
-            ))}
+            )}
           </div>
 
           <div style={{ marginTop: 48, textAlign: 'center' }}>
@@ -322,8 +325,137 @@ function PatientHome() {
           </div>
         </div>
       </section>
-    </main>
-  );
+    </main>);
+
+}
+
+// ----------- artery + balloon cross-section illustration -----------
+function ArteryBalloon() {
+  return (
+    <svg viewBox="0 0 520 300" role="img" aria-label="Drug-coated balloon opening a narrowed artery">
+      <defs>
+        <linearGradient id="ab-wall" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#cfe0f4" />
+          <stop offset="50%" stopColor="#e9f1fa" />
+          <stop offset="100%" stopColor="#cfe0f4" />
+        </linearGradient>
+        <linearGradient id="ab-balloon" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#1D4E9F" />
+          <stop offset="100%" stopColor="#00B7F1" />
+        </linearGradient>
+        <radialGradient id="ab-lumen" cx="50%" cy="50%" r="60%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="100%" stopColor="#f1f6fc" />
+        </radialGradient>
+      </defs>
+
+      {/* artery body — outer wall */}
+      <path d="M20 96 Q120 70 200 92 Q260 108 320 92 Q420 66 500 96 L500 204 Q420 234 320 208 Q260 192 200 208 Q120 230 20 204 Z"
+      fill="url(#ab-wall)" stroke="#b9cde8" strokeWidth="2" />
+      {/* lumen (inner channel) */}
+      <path d="M20 120 Q120 100 200 118 Q260 132 320 118 Q420 96 500 120 L500 180 Q420 204 320 182 Q260 168 200 182 Q120 200 20 180 Z"
+      fill="url(#ab-lumen)" stroke="#d4e2f3" strokeWidth="1.5" />
+
+      {/* plaque / narrowing top + bottom around the middle */}
+      <path d="M150 120 Q230 138 320 120 Q300 150 250 150 Q200 150 150 120 Z" fill="#a9bfdd" opacity="0.7" />
+      <path d="M150 180 Q230 162 320 180 Q300 150 250 150 Q200 150 150 180 Z" fill="#a9bfdd" opacity="0.7" />
+
+      {/* catheter shaft */}
+      <line x1="20" y1="150" x2="170" y2="150" stroke="#7d8aa3" strokeWidth="5" strokeLinecap="round" />
+      <line x1="350" y1="150" x2="500" y2="150" stroke="#7d8aa3" strokeWidth="2" strokeDasharray="4 4" opacity="0.5" />
+
+      {/* inflated balloon */}
+      <ellipse cx="250" cy="150" rx="92" ry="34" fill="url(#ab-balloon)" opacity="0.92" />
+      <ellipse cx="250" cy="150" rx="92" ry="34" fill="none" stroke="#0E2A57" strokeWidth="1.5" opacity="0.4" />
+      {/* balloon shoulders */}
+      <path d="M158 150 Q150 142 150 150 Q150 158 158 150" fill="#1D4E9F" />
+      <path d="M342 150 Q350 142 350 150 Q350 158 342 150" fill="#1D4E9F" />
+
+      {/* sirolimus drug particles transferring to wall */}
+      {[[200, 128], [230, 124], [270, 124], [300, 128], [210, 176], [250, 178], [290, 176], [185, 150], [315, 150]].map(([x, y], i) =>
+      <circle key={i} cx={x} cy={y} r="3" fill="#ffffff" opacity="0.9" />
+      )}
+
+      {/* labels */}
+      <g fontFamily="Poppins, sans-serif">
+        <line x1="250" y1="116" x2="250" y2="70" stroke="#9AA3B5" strokeWidth="1" />
+        <text x="250" y="60" textAnchor="middle" fontSize="12" fontWeight="600" fill="#1D4E9F" letterSpacing="0.06em">INFLATED BALLOON</text>
+        <line x1="385" y1="120" x2="430" y2="250" stroke="#9AA3B5" strokeWidth="1" />
+        <text x="430" y="266" textAnchor="middle" fontSize="11" fill="#6B7589">Narrowed artery</text>
+        <line x1="270" y1="124" x2="360" y2="40" stroke="#9AA3B5" strokeWidth="1" />
+        <text x="360" y="32" textAnchor="start" fontSize="11" fill="#6B7589">Sirolimus released into the wall</text>
+      </g>
+    </svg>);
+
+}
+
+// ----------- 3D world globe with availability pins -----------
+function Globe3D() {
+  const cx = 230,cy = 230,r = 180;
+  // pin positions (relative offsets within the sphere) — illustrative clusters
+  const pins = [
+  [-0.55, -0.30], [-0.40, -0.10], [-0.62, 0.10], [-0.30, 0.28],
+  [-0.05, -0.42], [0.10, -0.20], [-0.02, 0.05], [0.18, 0.22], [-0.18, -0.05],
+  [0.42, -0.34], [0.58, -0.08], [0.40, 0.14], [0.62, 0.30], [0.30, 0.40],
+  [0.05, 0.46], [-0.45, 0.40], [0.50, -0.46]];
+
+  return (
+    <svg viewBox="0 0 460 460" role="img" aria-label="Global availability across 80+ countries">
+      <defs>
+        <radialGradient id="g-sphere" cx="38%" cy="32%" r="75%">
+          <stop offset="0%" stopColor="#3E73C4" />
+          <stop offset="55%" stopColor="#1D4E9F" />
+          <stop offset="100%" stopColor="#102348" />
+        </radialGradient>
+        <radialGradient id="g-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="78%" stopColor="rgba(0,183,241,0)" />
+          <stop offset="100%" stopColor="rgba(0,183,241,0.35)" />
+        </radialGradient>
+        <clipPath id="g-clip"><circle cx={cx} cy={cy} r={r} /></clipPath>
+      </defs>
+
+      {/* atmospheric glow */}
+      <circle cx={cx} cy={cy} r={r + 14} fill="url(#g-glow)" />
+      {/* sphere */}
+      <circle cx={cx} cy={cy} r={r} fill="url(#g-sphere)" />
+
+      {/* meridians + parallels for 3D read */}
+      <g clipPath="url(#g-clip)" stroke="rgba(255,255,255,0.16)" strokeWidth="1" fill="none">
+        {[0.30, 0.58, 0.82].map((k, i) =>
+        <ellipse key={'m' + i} cx={cx} cy={cy} rx={r * k} ry={r} />
+        )}
+        <line x1={cx} y1={cy - r} x2={cx} y2={cy + r} />
+        {[-0.66, -0.34, 0, 0.34, 0.66].map((k, i) =>
+        <ellipse key={'p' + i} cx={cx} cy={cy + r * k} rx={r} ry={r * 0.18} />
+        )}
+      </g>
+
+      {/* faux continents — soft cyan land masses */}
+      <g clipPath="url(#g-clip)" fill="rgba(0,183,241,0.20)" stroke="rgba(0,183,241,0.30)" strokeWidth="1">
+        <path d="M120 150 q30 -20 60 -8 q20 10 10 34 q-16 26 -50 24 q-34 -2 -30 -30 z" />
+        <path d="M210 120 q40 -10 70 6 q18 16 4 40 q-26 24 -62 14 q-26 -12 -12 -40 z" />
+        <path d="M150 250 q34 -8 52 14 q12 22 -10 40 q-30 16 -52 -6 q-16 -28 10 -48 z" />
+        <path d="M270 240 q34 -14 58 8 q16 24 -8 44 q-30 18 -54 -4 q-16 -26 4 -48 z" />
+      </g>
+
+      {/* availability pins */}
+      <g clipPath="url(#g-clip)">
+        {pins.map(([dx, dy], i) => {
+          const px = cx + dx * r * 0.92;
+          const py = cy + dy * r * 0.92;
+          return (
+            <g key={i}>
+              <circle cx={px} cy={py} r="7" fill="rgba(0,183,241,0.25)" className="globe-pin-halo" style={{ animationDelay: (i * 0.18) + 's' }} />
+              <circle cx={px} cy={py} r="3" fill="#00B7F1" className="globe-pin" />
+            </g>);
+
+        })}
+      </g>
+
+      {/* rim highlight */}
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="1.5" />
+    </svg>);
+
 }
 
 window.PatientHome = PatientHome;

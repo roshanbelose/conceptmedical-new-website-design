@@ -9,6 +9,7 @@ function HCPHome() {
 
       {/* ============ HERO ============ */}
       <section className="hcp-hero" id="hero">
+        <span className="hero-aurora" aria-hidden="true" />
         <div className="container">
           <div className="hcp-hero-grid">
             <div>
@@ -37,42 +38,18 @@ function HCPHome() {
                   <div className="v">Coronary · Peripheral · AVF</div>
                 </div>
                 <div className="meta-block">
-                  <div className="k">RCTs published</div>
-                  <div className="v">3 head-to-head, 35+ total</div>
+                  <div className="k">Follow-up</div>
+                  <div className="v">Sustained to 36 months</div>
                 </div>
                 <div className="meta-block">
-                  <div className="k">Reach</div>
-                  <div className="v">75+ countries</div>
+                  <div className="k">Comparator</div>
+                  <div className="v">Head-to-head vs paclitaxel</div>
                 </div>
               </div>
             </div>
 
-            {/* Hero chart card */}
-            <div className="hero-chart-card">
-              <div className="head">
-                <div>
-                  <div className="eyebrow">SIRONA · primary endpoint</div>
-                  <div className="title">Freedom from CD-TLR · 36 months</div>
-                </div>
-                <span className="journal-pill gold">JACC · 2026</span>
-              </div>
-              <KMChart width={520} height={240} />
-              <div className="hero-chart-stats">
-                <div className="stat-block">
-                  <div className="num">88.2%</div>
-                  <div className="label">MagicTouch PTA</div>
-                  <div className="sub">Sirolimus-coated balloon</div>
-                </div>
-                <div className="stat-block comp">
-                  <div className="num">80.2%</div>
-                  <div className="label">Paclitaxel DCB</div>
-                  <div className="sub">Active comparator</div>
-                </div>
-              </div>
-              <div className="footnote">
-                Log-rank p=0.03 · HR 0.60 (95% CI 0.36–0.97) · n=482 · 25 sites. Preliminary before CEC adjudication.
-              </div>
-            </div>
+            {/* Hero — 3D evidence graph only */}
+            <HeroChart3D />
           </div>
         </div>
       </section>
@@ -92,24 +69,25 @@ function HCPHome() {
             {/* SIRONA */}
             <article className="trial-card t-sirona">
               <span className="accent" aria-hidden="true" />
-              <div className="meta-row">
-                <span className="indication">Femoropopliteal · SFA</span>
+              <div className="tc-top">
+                <span className="tc-name">
+                  <span className="tc-acronym">SIRONA</span>
+                  <span className="tc-type">Femoropopliteal · SFA</span>
+                </span>
                 <span className="journal-pill gold">JACC · 2026</span>
               </div>
-              <h3>SIRONA</h3>
-              <p className="subtitle">Sirolimus vs Paclitaxel-coated balloon · n=482 · 25 sites · 36-month follow-up</p>
-              <div className="chart-zone">
-                <MiniKM />
-                <div className="chart-cap">Freedom from CD-TLR · 0–36 months</div>
-              </div>
-              <div className="stat-row">
-                <div className="big">88.2%</div>
-                <div className="lab"><strong style={{ color: 'var(--cm-blue-900)' }}>vs 80.2%</strong> paclitaxel<br /><span style={{ color: 'var(--fg-muted)' }}>36-month freedom from CD-TLR</span></div>
+              <div className="tc-result">
+                <span className="tc-stat">88.2%</span>
+                <p className="tc-headline">Freedom from <em>CD-TLR</em> at 36 months</p>
+                <span className="tc-compare">
+                  <span className="vs-val">vs 80.2%</span> paclitaxel DCB
+                  <span className="vs-tag">p = 0.03</span>
+                </span>
               </div>
               <ul className="endpoints">
                 <li><span>HR (95% CI)</span><span className="v">0.60 (0.36–0.97)</span></li>
-                <li><span>Log-rank p</span><span className="v">0.03</span></li>
-                <li><span>Sustained @ 3 years</span><span className="v">Yes</span></li>
+                <li><span>Cohort</span><span className="v">n=482 · 25 sites</span></li>
+                <li><span>Comparator</span><span className="v">Paclitaxel DCB</span></li>
               </ul>
               <div className="card-foot">
                 <a className="read" href="#">Read SIRONA <span aria-hidden="true">→</span></a>
@@ -120,24 +98,25 @@ function HCPHome() {
             {/* SirPAD */}
             <article className="trial-card t-sirpad">
               <span className="accent" aria-hidden="true" />
-              <div className="meta-row">
-                <span className="indication">All-comer PAD</span>
+              <div className="tc-top">
+                <span className="tc-name">
+                  <span className="tc-acronym">SirPAD</span>
+                  <span className="tc-type">All-comer PAD</span>
+                </span>
                 <span className="journal-pill">NEJM · 2026</span>
               </div>
-              <h3>SirPAD</h3>
-              <p className="subtitle">MagicTouch PTA vs uncoated balloon · n=1,252 · all-comer trial · 12-month primary</p>
-              <div className="chart-zone">
-                <RiskDifference width={280} height={110} value={-6.2} scale={[-12, 4]} color="var(--cm-blue-200)" />
-                <div className="chart-cap">Absolute risk difference · MALE @ 12 mo</div>
-              </div>
-              <div className="stat-row">
-                <div className="big">8.8%</div>
-                <div className="lab"><strong style={{ color: 'var(--cm-blue-900)' }}>vs 15.0%</strong> uncoated<br /><span style={{ color: 'var(--fg-muted)' }}>MALE rate @ 12 months</span></div>
+              <div className="tc-result">
+                <span className="tc-stat">&minus;6.2%</span>
+                <p className="tc-headline">Lower <em>major adverse limb events</em> at 12 months</p>
+                <span className="tc-compare">
+                  <span className="vs-val">8.8%</span> vs 15.0% uncoated
+                  <span className="vs-tag">p = 0.001</span>
+                </span>
               </div>
               <ul className="endpoints">
-                <li><span>Absolute risk diff.</span><span className="v">–6.2% (–9.5 to –2.9)</span></li>
-                <li><span>P, superiority</span><span className="v">0.001</span></li>
-                <li><span>Cohort</span><span className="v">All-comers · 12 mo</span></li>
+                <li><span>Risk diff. (95% CI)</span><span className="v">–6.2% (–9.5 to –2.9)</span></li>
+                <li><span>Cohort</span><span className="v">n=1,252 · all-comers</span></li>
+                <li><span>Comparator</span><span className="v">Uncoated balloon</span></li>
               </ul>
               <div className="card-foot">
                 <a className="read" href="#">Read in NEJM <span aria-hidden="true">→</span></a>
@@ -148,24 +127,25 @@ function HCPHome() {
             {/* IMPRESSION */}
             <article className="trial-card t-impression">
               <span className="accent" aria-hidden="true" />
-              <div className="meta-row">
-                <span className="indication">Vascular access · AVF</span>
+              <div className="tc-top">
+                <span className="tc-name">
+                  <span className="tc-acronym">IMPRESSION</span>
+                  <span className="tc-type">Vascular access · AVF</span>
+                </span>
                 <span className="journal-pill green">Kidney Int. · 2025</span>
               </div>
-              <h3>IMPRESSION</h3>
-              <p className="subtitle">Sirolimus DCB vs plain balloon · arteriovenous fistula stenosis · 6-month TLPP</p>
-              <div className="chart-zone" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, padding: '14px 4px' }}>
-                <DonutChart value={78} label="MagicTouch" size={108} color="#213E7B" />
-                <DonutChart value={51} label="Plain PTA" size={108} color="#C9D0DC" />
-              </div>
-              <div className="stat-row">
-                <div className="big" style={{ color: 'var(--cm-blue-700)' }}>78%</div>
-                <div className="lab"><strong style={{ color: 'var(--cm-blue-900)' }}>vs 51%</strong> plain PTA<br /><span style={{ color: 'var(--fg-muted)' }}>Target-lesion primary patency @ 6 mo</span></div>
+              <div className="tc-result">
+                <span className="tc-stat">78%</span>
+                <p className="tc-headline">Target-lesion <em>patency</em> at 6 months</p>
+                <span className="tc-compare">
+                  <span className="vs-val">vs 51%</span> plain balloon
+                  <span className="vs-tag">p &lt; 0.001</span>
+                </span>
               </div>
               <ul className="endpoints">
                 <li><span>HR (95% CI)</span><span className="v">0.42 (0.25–0.71)</span></li>
-                <li><span>P, primary</span><span className="v">&lt;0.001</span></li>
-                <li><span>Cohort</span><span className="v">AVF stenosis · n=170</span></li>
+                <li><span>Cohort</span><span className="v">n=170 · AVF stenosis</span></li>
+                <li><span>Comparator</span><span className="v">Plain balloon</span></li>
               </ul>
               <div className="card-foot">
                 <a className="read" href="#" style={{ color: 'var(--cm-blue-700)' }}>Read publication <span aria-hidden="true">→</span></a>
@@ -181,12 +161,12 @@ function HCPHome() {
         <div className="container">
           <div className="impact-grid">
             <div className="impact-cell">
-              <div className="impact-num">75<span className="suffix">+</span></div>
+              <div className="impact-num">80<span className="suffix">+</span></div>
               <div className="impact-label">Countries</div>
               <div className="impact-sub">where MagicTouch is in clinical use</div>
             </div>
             <div className="impact-cell">
-              <div className="impact-num">35<span className="suffix">+</span></div>
+              <div className="impact-num">45<span className="suffix">+</span></div>
               <div className="impact-label">Clinical trials</div>
               <div className="impact-sub">RCTs &amp; registries, peer-reviewed</div>
             </div>
@@ -244,10 +224,12 @@ function HCPHome() {
         </div>
       </section>
 
+
       {t.showSocietyBand !== false && <SocietyBand />}
 
       {t.showPullQuote !== false && (
         <PullQuote
+          bgImage={(window.__resources && window.__resources.quoteBg) || "assets/quote-bg.jpg"}
           text='“For the first time, we have head-to-head, peer-reviewed evidence that a sirolimus-coated balloon is non-inferior to paclitaxel in the SFA — and sustained at three years.”'
           cite="Principal Investigator · SIRONA · CX Symposium 2026"
         />
@@ -284,6 +266,66 @@ function HCPHome() {
           </div>
         </div>
       </section>
+      {/* ============ PRODUCTS & TECHNOLOGIES ============ */}
+      <section className="section" id="products">
+        <div className="container">
+          <SectionHead
+            eyebrow="Products & Technologies"
+            title='Engineered for <em class="editorial">precision</em> drug delivery.'
+            lead="A sirolimus platform spanning coronary, peripheral and AV-access — built on a proprietary nanocarrier coating."
+          />
+          <div className="prodtech-feature">
+            <a className="pt-tile dcb" href="#">
+              <div className="pt-media">
+                <img src="assets/magictouch-scb-render.png" alt="MagicTouch SCB sirolimus-coated balloon catheter" />
+                <div className="pt-wordmark">
+                  <span className="wm-name">MagicTouch <span className="chip">SCB</span></span>
+                  <span className="wm-sub">Sirolimus Coated Balloon Catheter</span>
+                </div>
+              </div>
+              <div className="pt-foot">
+                <span className="pt-label">Drug Coated Balloon</span>
+                <span className="pt-arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
+
+            <a className="pt-tile tech" href="#">
+              <div className="pt-media">
+                <img src="assets/nanolute-technology.webp" alt="Nanolutè encapsulated sirolimus nanocarrier — molecular render" />
+                <div className="pt-tech-tag">
+                  <span className="tt-name">Nanolutè™</span>
+                  <span className="tt-sub">Encapsulated Sirolimus Nanocarrier</span>
+                </div>
+              </div>
+              <div className="pt-foot">
+                <span className="pt-label">Technology</span>
+                <span className="pt-arrow" aria-hidden="true">↗</span>
+              </div>
+            </a>
+          </div>
+
+          <div className="prodtech-row">
+            {[
+              { cat: 'Peripheral · PTA', name: 'MagicTouch PTA', desc: 'Sirolimus DCB for peripheral artery disease.' },
+              { cat: 'Vascular access', name: 'MagicTouch AVF', desc: 'Sirolimus DCB for AV-fistula stenosis.' },
+              { cat: 'Drug-eluting stent', name: 'Abluminus DES+', desc: 'Sirolimus-eluting stent system.' },
+            ].map((p, i) => (
+              <a className="pt-mini" href="#" key={i}>
+                <div className="pm-media">
+                  <img src="assets/magictouch-scb-render.png" alt={p.name} />
+                </div>
+                <div className="pm-body">
+                  <div className="pm-cat">{p.cat}</div>
+                  <div className="pm-name">{p.name}</div>
+                  <div className="pm-desc">{p.desc}</div>
+                </div>
+                <span className="pm-arrow" aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }
@@ -334,6 +376,39 @@ function H2HCard() {
           <a href="#" className="btn btn-secondary" style={{ padding: '8px 14px', fontSize: 11 }}>Full methods</a>
           <a href="#" className="btn btn-primary" style={{ padding: '8px 14px', fontSize: 11 }}>Read publication</a>
         </span>
+      </div>
+    </div>
+  );
+}
+
+// ----------- hero: graph-only, 3D evidence card -----------
+function HeroChart3D() {
+  return (
+    <div className="hero-chart-3d">
+      <div className="h3d-inner">
+        <div className="head">
+          <div>
+            <div className="eyebrow">SIRONA · primary endpoint</div>
+            <div className="title">Freedom from CD-TLR · 36 months</div>
+          </div>
+          <span className="journal-pill gold">JACC · 2026</span>
+        </div>
+        <KMChart width={520} height={236} />
+        <div className="hero-chart-stats">
+          <div className="stat-block">
+            <div className="num">88.2%</div>
+            <div className="label">MagicTouch PTA</div>
+            <div className="sub">Sirolimus-coated balloon</div>
+          </div>
+          <div className="stat-block comp">
+            <div className="num">80.2%</div>
+            <div className="label">Paclitaxel DCB</div>
+            <div className="sub">Active comparator</div>
+          </div>
+        </div>
+        <div className="footnote">
+          Log-rank p=0.03 · HR 0.60 (95% CI 0.36–0.97) · n=482 · 25 sites · 36-month follow-up.
+        </div>
       </div>
     </div>
   );
